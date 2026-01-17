@@ -15,13 +15,14 @@ int frame=0;
 void setup(void)
 {
   u8g2.begin();
-  Serial.begin(9600);
-  delay(1000);
+  Serial.begin(115200);
   Serial.println("\nStarting ESP32 OTA Update");
-
-  connectToWiFi();
+  
+  // connectToWiFi();
+  init_webpage();
   Serial.println("Device is ready.");
   Serial.println("Current Firmware Version: " + String(currentFirmwareVersion));
+  delay(3000);
   checkForFirmwareUpdate();
 }
 
