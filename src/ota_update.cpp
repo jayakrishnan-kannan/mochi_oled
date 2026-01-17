@@ -8,7 +8,7 @@
 // WiFi credentials
 const char* ssid = "Gayathri 1 4G"; // put your wifi name
 const char* password = "gayathri4g"; // put your wifi password
-const char* firmwareUrl = "https://github.com/jayakrishnan-kannan/mochi_oled/releases/download/First_release/firmware.bin";
+const char* firmwareUrl = "https://github.com/jayakrishnan-kannan/mochi_oled/releases/download/V1.1.10/firmware.bin";
 const char* versionUrl = "https://raw.githubusercontent.com/jayakrishnan-kannan/mochi_oled/refs/heads/master/Version.txt";
 
 // Current firmware version
