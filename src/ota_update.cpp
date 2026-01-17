@@ -12,7 +12,7 @@ const char* firmwareUrl = "https://github.com/jayakrishnan-kannan/mochi_oled/rel
 const char* versionUrl = "https://raw.githubusercontent.com/jayakrishnan-kannan/mochi_oled/refs/heads/master/Version.txt";
 
 // Current firmware version
-const char* currentFirmwareVersion = "1.0.0";
+const char* currentFirmwareVersion = "1.1.10";
 const unsigned long updateCheckInterval = 5 * 60 * 1000;  // 5 minutes in milliseconds
 unsigned long lastUpdateCheck = 0;
 
