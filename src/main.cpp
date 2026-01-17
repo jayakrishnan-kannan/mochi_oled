@@ -29,9 +29,9 @@ void loop(void)
 {
   Serial.println("Current Firmware Version: " + String(currentFirmwareVersion));
 	frame++;
-  run_latest_anime();
+  // run_latest_anime();
   // delay(1000);
-  // run_first_smile();
+  run_first_smile();
 
 }
 void run_first_smile(void)
