@@ -11,8 +11,10 @@ const char* password = "gayathri4g"; // put your wifi password
 const char* firmwareUrl = "https://github.com/jayakrishnan-kannan/mochi_oled/releases/download/V1.1.10/firmware.bin";
 const char* versionUrl = "https://raw.githubusercontent.com/jayakrishnan-kannan/mochi_oled/refs/heads/master/Version.txt";
 
+const char* github_owner = "jayakrishnan-kannan";
+const char* github_repo = "mochi_oled";
 // Current firmware version
-const char* currentFirmwareVersion = "1.1.10";
+// const char* currentFirmwareVersion = "1.0.0";
 const unsigned long updateCheckInterval = 5 * 60 * 1000;  // 5 minutes in milliseconds
 unsigned long lastUpdateCheck = 0;
 
@@ -33,7 +35,12 @@ void checkForFirmwareUpdate() {
     Serial.println("WiFi not connected");
     return;
   }
-  Serial.printf("WiFi connected %d\n",WiFi.status() );
+
+
+  Serial.println("---------------------------------");
+  Serial.println("Checking for new firmware...");
+  Serial.println(String(firmwareUrl));
+  // Serial.println("Fetching release info from: " + apiUrl);
 
   // Step 1: Fetch the latest version from GitHub
   String latestVersion = fetchLatestVersion();
@@ -80,7 +87,11 @@ void downloadAndApplyFirmware() {
 
   HTTPClient http;
   http.setFollowRedirects(HTTPC_STRICT_FOLLOW_REDIRECTS);
-  http.begin(client,firmwareUrl);
+  delay(2000);
+  String apiUrl = "https://api.github.com/repos/" + String(github_owner) + "/" + String(github_repo) + "/releases/latest";
+
+  http.begin(client,apiUrl);
+  // http.begin(client,firmwareUrl);
 
   int httpCode = http.GET();
   Serial.printf("HTTP GET code: %d\n", httpCode);
