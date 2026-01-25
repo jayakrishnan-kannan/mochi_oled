@@ -2,12 +2,6 @@
 #include "love.h"
 #include <Arduino.h>
 
-const expression love_expression {
-  love_frame,
-  love_delta_frames,
-  love_delta_counts
-};
-
 const uint8_t love_frame[1024] PROGMEM = {
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -5154,3 +5148,12 @@ const uint16_t love_delta_counts[] = {
   frame_73_delta_count,
   frame_74_delta_count,
 };
+const uint16_t love_frame_count = 75;
+
+const expression love_expression {
+  love_frame,
+  love_delta_frames,
+  love_delta_counts,
+  love_frame_count
+};
+

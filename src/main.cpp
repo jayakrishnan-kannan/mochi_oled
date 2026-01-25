@@ -31,6 +31,7 @@ void setup() {
 
 void loop() {
   playGIF(&expressions_list[random(0, sizeof(expressions_list)/sizeof(expressions_list[0]))]);
-  delay(1000);
+  delay(2000);
+  // playGIF(&frames_250_expression);
 }
 

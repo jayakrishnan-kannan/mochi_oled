@@ -2,12 +2,6 @@
 #include "embarrassed.h"
 #include <Arduino.h>
 
-const expression embarrassed_expression {
-  embarrassed_frame,
-  embarrassed_delta_frames,
-  embarrassed_delta_counts
-};
-
 const uint8_t embarrassed_frame[1024] PROGMEM = {
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -2442,3 +2436,12 @@ const uint16_t embarrassed_delta_counts[] = {
   frame_73_delta_count,
   frame_74_delta_count,
 };
+const uint16_t embarrassed_frame_count = 75;
+
+const expression embarrassed_expression {
+  embarrassed_frame,
+  embarrassed_delta_frames,
+  embarrassed_delta_counts,
+  embarrassed_frame_count
+};
+

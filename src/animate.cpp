@@ -5,8 +5,10 @@
 
 uint8_t framebuffer[1024];
 
+
 void playGIF(const expression *expression) {
-   for (uint8_t frame = 0; frame < FRAME_COUNT; frame++) {
+   int length = expression->frame_count;
+   for (uint8_t frame = 0; frame < length; frame++) {
 
     if (frame == 0) {
       memcpy_P(framebuffer, expression->base_frame, 1024);

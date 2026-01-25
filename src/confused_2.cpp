@@ -2,12 +2,6 @@
 #include "confused_2.h"
 #include <Arduino.h>
 
-const expression confused_2_expression {
-  confused_2_frame,
-  confused_2_delta_frames,
-  confused_2_delta_counts
-};
-
 const uint8_t confused_2_frame[1024] PROGMEM = {
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0x07,
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0xFF, 0x07,
@@ -8477,3 +8471,12 @@ const uint16_t confused_2_delta_counts[] = {
   frame_74_delta_count,
   frame_75_delta_count,
 };
+const uint16_t confused_2_frame_count = 76;
+
+const expression confused_2_expression {
+  confused_2_frame,
+  confused_2_delta_frames,
+  confused_2_delta_counts,
+  confused_2_frame_count
+};
+

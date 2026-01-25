@@ -2,12 +2,6 @@
 #include "happy.h"
 #include <Arduino.h>
 
-const expression happy_expression {
-  happy_frame,
-  happy_delta_frames,
-  happy_delta_counts
-};
-
 const uint8_t happy_frame[1024] PROGMEM = {
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -1847,3 +1841,12 @@ const uint16_t happy_delta_counts[] = {
   frame_73_delta_count,
   frame_74_delta_count,
 };
+const uint16_t happy_frame_count = 75;
+
+const expression happy_expression {
+  happy_frame,
+  happy_delta_frames,
+  happy_delta_counts,
+  happy_frame_count
+};
+

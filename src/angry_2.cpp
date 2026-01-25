@@ -2,12 +2,6 @@
 #include "angry_2.h"
 #include <Arduino.h>
 
-const expression angry_2_expression {
-  angry_2_frame,
-  angry_2_delta_frames,
-  angry_2_delta_counts
-};
-
 const uint8_t angry_2_frame[1024] PROGMEM = {
   0x00, 0x00, 0x00, 0x00, 0xF8, 0xFF, 0x7F, 0x00, 0x00, 0x80, 0xFF, 0xFF, 0x1F, 0x00, 0x00, 0x00,
   0x00, 0x00, 0x00, 0x00, 0xFC, 0xFF, 0x7F, 0x00, 0x00, 0x80, 0xFF, 0xFF, 0x1F, 0x00, 0x00, 0x00,
@@ -7332,3 +7326,12 @@ const uint16_t angry_2_delta_counts[] = {
   frame_73_delta_count,
   frame_74_delta_count,
 };
+const uint16_t angry_2_frame_count = 75;
+
+const expression angry_2_expression {
+  angry_2_frame,
+  angry_2_delta_frames,
+  angry_2_delta_counts,
+  angry_2_frame_count
+};
+

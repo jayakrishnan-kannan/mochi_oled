@@ -2,12 +2,6 @@
 #include "sleepy_3.h"
 #include <Arduino.h>
 
-const expression sleepy_3_expression {
-  sleepy_3_frame,
-  sleepy_3_delta_frames,
-  sleepy_3_delta_counts
-};
-
 const uint8_t sleepy_3_frame[1024] PROGMEM = {
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -9352,3 +9346,12 @@ const uint16_t sleepy_3_delta_counts[] = {
   frame_73_delta_count,
   frame_74_delta_count,
 };
+const uint16_t sleepy_3_frame_count = 75;
+
+const expression sleepy_3_expression {
+  sleepy_3_frame,
+  sleepy_3_delta_frames,
+  sleepy_3_delta_counts,
+  sleepy_3_frame_count
+};
+

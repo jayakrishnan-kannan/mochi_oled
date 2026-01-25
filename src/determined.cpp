@@ -2,12 +2,6 @@
 #include "determined.h"
 #include <Arduino.h>
 
-const expression determined_expression {
-  determined_frame,
-  determined_delta_frames,
-  determined_delta_counts
-};
-
 const uint8_t determined_frame[1024] PROGMEM = {
   0xF8, 0x1F, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0xFF, 0x07,
   0xF8, 0x3F, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0xFF, 0x07,
@@ -7723,3 +7717,12 @@ const uint16_t determined_delta_counts[] = {
   frame_73_delta_count,
   frame_74_delta_count,
 };
+const uint16_t determined_frame_count = 75;
+
+const expression determined_expression {
+  determined_frame,
+  determined_delta_frames,
+  determined_delta_counts,
+  determined_frame_count
+};
+

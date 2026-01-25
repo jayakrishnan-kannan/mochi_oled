@@ -2,12 +2,6 @@
 #include "frustrated.h"
 #include <Arduino.h>
 
-const expression frustrated_expression {
-  frustrated_frame,
-  frustrated_delta_frames,
-  frustrated_delta_counts
-};
-
 const uint8_t frustrated_frame[1024] PROGMEM = {
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -3553,3 +3547,12 @@ const uint16_t frustrated_delta_counts[] = {
   frame_73_delta_count,
   frame_74_delta_count,
 };
+const uint16_t frustrated_frame_count = 75;
+
+const expression frustrated_expression {
+  frustrated_frame,
+  frustrated_delta_frames,
+  frustrated_delta_counts,
+  frustrated_frame_count
+};
+

@@ -2,12 +2,6 @@
 #include "relaxed.h"
 #include <Arduino.h>
 
-const expression relaxed_expression {
-  relaxed_frame,
-  relaxed_delta_frames,
-  relaxed_delta_counts
-};
-
 const uint8_t relaxed_frame[1024] PROGMEM = {
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -5292,3 +5286,12 @@ const uint16_t relaxed_delta_counts[] = {
   frame_73_delta_count,
   frame_74_delta_count,
 };
+const uint16_t relaxed_frame_count = 75;
+
+const expression relaxed_expression {
+  relaxed_frame,
+  relaxed_delta_frames,
+  relaxed_delta_counts,
+  relaxed_frame_count
+};
+

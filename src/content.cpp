@@ -2,12 +2,6 @@
 #include "content.h"
 #include <Arduino.h>
 
-const expression content_expression {
-  content_frame,
-  content_delta_frames,
-  content_delta_counts
-};
-
 const uint8_t content_frame[1024] PROGMEM = {
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -6624,3 +6618,12 @@ const uint16_t content_delta_counts[] = {
   frame_74_delta_count,
   frame_75_delta_count,
 };
+const uint16_t content_frame_count = 76;
+
+const expression content_expression {
+  content_frame,
+  content_delta_frames,
+  content_delta_counts,
+  content_frame_count
+};
+

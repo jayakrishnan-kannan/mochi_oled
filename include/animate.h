@@ -24,6 +24,7 @@ typedef struct {
     const uint8_t* base_frame;          // Pointer to the base frame data
     const delta_t** delta_frames;       // Pointer to array of pointers to delta frames
     const uint16_t* delta_counts;       // Pointer to array of delta counts per frame
+    const uint8_t frame_count;         // Number of frames
 } expression;
 
 extern const expression proud_expression;
@@ -46,6 +47,7 @@ extern const expression confused_2_expression;
 extern const expression content_expression;
 extern const expression angry_expression;
 extern const expression angry_2_expression;
+extern const expression frames_250_expression;
 
  
 extern U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2; // initialization for the used OLED display

@@ -2,12 +2,6 @@
 #include "laugh.h"
 #include <Arduino.h>
 
-const expression laugh_expression {
-  laugh_frame,
-  laugh_delta_frames,
-  laugh_delta_counts
-};
-
 const uint8_t laugh_frame[1024] PROGMEM = {
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -6510,3 +6504,12 @@ const uint16_t laugh_delta_counts[] = {
   frame_73_delta_count,
   frame_74_delta_count,
 };
+const uint16_t laugh_frame_count = 75;
+
+const expression laugh_expression {
+  laugh_frame,
+  laugh_delta_frames,
+  laugh_delta_counts,
+  laugh_frame_count
+};
+
