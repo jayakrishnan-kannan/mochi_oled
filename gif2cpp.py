@@ -81,13 +81,6 @@ def main(gif_path, out_cpp):
         f.write("#include <stdint.h>\n")
         f.write('#include "' + out_cpp + '.h"\n')
         f.write("#include <Arduino.h>\n\n")
-        # f.write(f"#define FRAME_COUNT {len(frames)}\n\n")
-
-        f.write(f"const expression {out_cpp}_expression {{\n")
-        f.write(f"  {out_cpp}_frame,\n")
-        f.write(f"  {out_cpp}_delta_frames,\n")
-        f.write(f"  {out_cpp}_delta_counts\n")
-        f.write("};\n\n")
 
         # Base frame
         f.write(f"const uint8_t {out_cpp}_frame[1024] PROGMEM = {{\n")
@@ -117,6 +110,13 @@ def main(gif_path, out_cpp):
         for i in range(1, len(frames)):
             f.write(f"  frame_{i}_delta_count,\n")
         f.write("};\n")
+        f.write(f"const uint16_t {out_cpp}_frame_count = {len(frames)};\n\n")
+        f.write(f"const expression {out_cpp}_expression {{\n")
+        f.write(f"  {out_cpp}_frame,\n")
+        f.write(f"  {out_cpp}_delta_frames,\n")
+        f.write(f"  {out_cpp}_delta_counts,\n")
+        f.write(f"  {out_cpp}_frame_count\n")
+        f.write("};\n\n")
 
     print(f"[OK] Generated {out_cpp}")
 
