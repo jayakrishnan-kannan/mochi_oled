@@ -69,7 +69,7 @@ def main(gif_path, out_cpp):
         make_deltas(frames[i - 1], frames[i]) for i in range(1, len(frames))
     ]
 
-    with open(f"include/{out_cpp}.h", "w") as f:
+    with open(f"../include/{out_cpp}.h", "w") as f:
         f.write("#pragma once\n")
         f.write("#include <stdint.h>\n")
         f.write('#include "animate.h"\n\n')
@@ -77,7 +77,7 @@ def main(gif_path, out_cpp):
         f.write(f"extern const delta_t* {out_cpp}_delta_frames[];\n")
         f.write(f"extern const uint16_t {out_cpp}_delta_counts[];\n")
 
-    with open(f"src/{out_cpp}.cpp", "w") as f:
+    with open(f"../src/{out_cpp}.cpp", "w") as f:
         f.write("#include <stdint.h>\n")
         f.write('#include "' + out_cpp + '.h"\n')
         f.write("#include <Arduino.h>\n\n")
