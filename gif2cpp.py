@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import re
 import sys
+import os
 from PIL import Image, ImageSequence, ImageFilter, ImageOps
 
 WIDTH = 128
@@ -68,18 +69,28 @@ def main(gif_path, out_cpp):
         make_deltas(frames[i - 1], frames[i]) for i in range(1, len(frames))
     ]
 
-    with open(out_cpp, "w") as f:
-        f.write("#include <stdint.h>\n\n")
-        f.write("#include <Arduino.h>\n\n")
-        f.write(f"#define FRAME_COUNT {len(frames)}\n\n")
+    with open(f"include/{out_cpp}.h", "w") as f:
+        f.write("#pragma once\n")
+        f.write("#include <stdint.h>\n")
+        f.write('#include "animate.h"\n\n')
+        f.write(f"extern const uint8_t {out_cpp}_frame[1024];\n")
+        f.write(f"extern const delta_t* {out_cpp}_delta_frames[];\n")
+        f.write(f"extern const uint16_t {out_cpp}_delta_counts[];\n")
 
-        f.write("typedef struct {\n")
-        f.write("  uint16_t index;\n")
-        f.write("  uint8_t value;\n")
-        f.write("} delta_t;\n\n")
+    with open(f"src/{out_cpp}.cpp", "w") as f:
+        f.write("#include <stdint.h>\n")
+        f.write('#include "' + out_cpp + '.h"\n')
+        f.write("#include <Arduino.h>\n\n")
+        # f.write(f"#define FRAME_COUNT {len(frames)}\n\n")
+
+        f.write(f"const expression {out_cpp}_expression {{\n")
+        f.write(f"  {out_cpp}_frame,\n")
+        f.write(f"  {out_cpp}_delta_frames,\n")
+        f.write(f"  {out_cpp}_delta_counts\n")
+        f.write("};\n\n")
 
         # Base frame
-        f.write("const uint8_t base_frame[1024] PROGMEM = {\n")
+        f.write(f"const uint8_t {out_cpp}_frame[1024] PROGMEM = {{\n")
         for i in range(0, len(base), 16):
             line = ", ".join(f"0x{b:02X}" for b in base[i : i + 16])
             f.write(f"  {line},\n")
@@ -95,13 +106,13 @@ def main(gif_path, out_cpp):
             f.write(f"const uint16_t frame_{i+1}_delta_count = {len(deltas)};\n\n")
 
         # Frame table
-        f.write("const delta_t* delta_frames[] = {\n")
+        f.write(f"const delta_t* {out_cpp}_delta_frames[] = {{\n")
         f.write("  NULL,\n")
         for i in range(1, len(frames)):
             f.write(f"  frame_{i}_deltas,\n")
         f.write("};\n\n")
 
-        f.write("const uint16_t delta_counts[] = {\n")
+        f.write(f"const uint16_t {out_cpp}_delta_counts[] = {{\n")
         f.write("  0,\n")
         for i in range(1, len(frames)):
             f.write(f"  frame_{i}_delta_count,\n")
@@ -176,12 +187,20 @@ def cpp_to_gif(input_cpp, output_gif, fps=10):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 3:
-        print("Usage: gif2xbm_delta.py input.gif output.cpp")
-        sys.exit(1)
 
-    if sys.argv[1].endswith((".mp4", ".gif")):
-        # media_to_cpp(sys.argv[1], sys.argv[2])
-        main(sys.argv[1], sys.argv[2])
-    else:
-        cpp_to_gif(sys.argv[1], sys.argv[2])
+    match len(sys.argv):
+        case 2:
+            if sys.argv[1].endswith((".mp4", ".gif")):
+                # media_to_cpp(sys.argv[1], sys.argv[2])
+                filename = os.path.basename(sys.argv[1])
+
+                name_without_ext = os.path.splitext(filename)[0]
+
+                main(sys.argv[1], name_without_ext)
+            else:
+                cpp_to_gif(sys.argv[1], sys.argv[2])
+        case 3:
+            main(sys.argv[1], sys.argv[2])
+        case _:
+            print("Usage: gif2cpp.py input.gif output.cpp")
+            sys.exit(1)
