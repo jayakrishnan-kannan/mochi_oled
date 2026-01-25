@@ -1,26 +1,52 @@
-#include "angry.h"
+#include "animate.h"
 #include <U8g2lib.h>
 #include <Adafruit_SSD1306.h>
-U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE); // initialization for the used OLED display
+// U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE); // initialization for the used OLED display
 
-void playGIF(const AnimatedGIF* gif) {
-    for (uint8_t frame_index = 0; frame_index < gif->frame_count; frame_index++)
-    {
-                u8g2.clearBuffer();
-                
-                // Display the current frame
-                // for (uint16_t y = 0; y < gif->height; y++) {
-                //     for (uint16_t x = 0; x < gif->width; x++) {
-                //         uint16_t byteIndex = y * (((gif->width + 7) / 8)) + (x / 8);
-                //         uint8_t bitIndex = 7 - (x % 8);
-                //         if (gif->frames[frame][byteIndex] & (1 << bitIndex)) {
-                //             u8g2.drawPixel(x, y);
-                //         }
-                //     }
-                // }
-                 u8g2.drawXBMP(0,0,128,64, gif->frames[frame_index]);
-                
-                u8g2.sendBuffer();
-                delay(gif->delays[frame_index]);
-            }
-          }
+uint8_t framebuffer[1024];
+
+void playGIF(const expression *expression) {
+   for (uint8_t frame = 0; frame < FRAME_COUNT; frame++) {
+
+    if (frame == 0) {
+      memcpy_P(framebuffer, expression->base_frame, 1024);
+    } else {
+      apply_deltas(framebuffer,
+                   expression->delta_frames[frame],
+                   expression->delta_counts[frame]);
+    }
+
+    u8g2.clearBuffer();
+    u8g2.drawXBMP(0, 0, 128, 64, framebuffer);
+    u8g2.sendBuffer();
+
+    delay(50);
+  }
+}
+
+void apply_deltas(uint8_t* fb, const delta_t* deltas, uint16_t count)
+{
+  // bool page_dirty[8] = {false};
+
+  // 1. Detect dirty pages
+  // for (uint16_t i = 0; i < count; i++) {
+  //   delta_t d;
+  //   memcpy_P(&d, &deltas[i], sizeof(delta_t));
+  //   uint8_t page = d.index >> 7;   // index / 128
+  //   page_dirty[page] = true;
+  // }
+
+  // // 2. Clear dirty pages
+  // for (uint8_t page = 0; page < 8; page++) {
+  //   if (page_dirty[page]) {
+  //     memset(&fb[page * 128], 0x00, 128);
+  //   }
+  // }
+
+  // 3. Apply deltas
+  for (uint16_t i = 0; i < count; i++) {
+    uint16_t index = pgm_read_word(&deltas[i].index);
+    uint8_t value  = pgm_read_byte(&deltas[i].value);
+    fb[index] = value;  
+    }
+}
